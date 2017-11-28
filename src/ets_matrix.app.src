@@ -1,8 +1,7 @@
-{application, first_release,
- [{description, "An OTP application"},
+{application, ets_matrix,
+ [{description, "An escript"},
   {vsn, "0.1.0"},
   {registered, []},
-  {mod, { first_release_app, []}},
   {applications,
    [kernel,
     stdlib
