@@ -10,8 +10,6 @@
 
 -export([arithmetic_sum/2]).
 
--include_lib("eunit/include/eunit.hrl").
-
 arithmetic_sum(0,0)->
     {{0, 0, {}},[], []};
 arithmetic_sum(Width,Height)->
