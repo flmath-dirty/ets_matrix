@@ -22,7 +22,13 @@ main([Module, Function, MatrixWidth, MatrixHeight, RunsNo]) ->
 		io:format("~p~n",[[Mod,Error]]),
 		usage()
 	end,
-    io:format("~p~n",[Result]);
+    io:format("{Representation: ~p, "
+	      "Operation: ~p, "
+	      "Width: ~p, "
+	      "Height: ~p, "
+	      "Runs: ~p, "
+	      "ExecutionTime: ~p}~n",
+	      [Module, Function, MatrixWidth, MatrixHeight, RunsNo, Result]);
 main(_) ->
     usage().
 %%====================================================================

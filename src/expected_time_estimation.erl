@@ -27,4 +27,3 @@ run(Module, Function, MatrixWidth, MatrixHeight, RunsNo)->
     Matrix = prepare_matrix(Module, MatrixWidth, MatrixHeight),
     Arguments = prepare_arguments(Matrix,  MatrixWidth, MatrixHeight, Function),
     timer:tc(repeat_apply, on_matrix, [Module,Function,Arguments,RunsNo]).
-
