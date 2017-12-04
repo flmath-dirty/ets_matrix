@@ -40,3 +40,11 @@ usage()->
 	      "Function ex.  get_value\n"
 	      "MatrixWidth, MatrixHeight, the number of runs are integers\n"
               "examples: ets_matrix matrix_as_map get_value 1000 1000 1000 \n",[]).
+
+list_of_matrix_forms()->
+    [matrix_as_sofs,
+     matrix_as_digraph, 
+     matrix_as_array, 
+     matrix_as_map, 
+     matrix_as_big_tuple, 
+     matrix_as_list_of_lists].
