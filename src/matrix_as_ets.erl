@@ -4,7 +4,7 @@
 %%% @doc
 %%%
 %%% @end
-%%% Created : 3 DecOct 2017 by Math
+%%% Created : 3 Dec 2017 by Math
 %%%-------------------------------------------------------------------
 -module(matrix_as_ets).
 -export([rows_sums/1, cols_sums/1,
@@ -39,3 +39,4 @@ get_value(TheX, TheY, MatrixEts)->
 set_value(TheX, TheY, NewValue, MatrixEts)->
     true = ets:insert(MatrixEts, {{TheX, TheY}, NewValue}),
     MatrixEts.
+

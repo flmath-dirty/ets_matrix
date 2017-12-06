@@ -13,7 +13,8 @@
          load/1]).
 
 load({Width,Height,Matrix})->
-    PropList = [{{X, Y}, element(X+(Y-1)*Width, Matrix)} || Y<-lists:seq(1,Height),X<-lists:seq(1,Width)],
+    PropList = 
+	[{{X, Y}, element(X+(Y-1)*Width, Matrix)} || Y<-lists:seq(1,Height),X<-lists:seq(1,Width)],
     maps:from_list(lists:append([{height,Height},{width,Width}], PropList)).
 
 rows_sums({0,0,_})-> [];
