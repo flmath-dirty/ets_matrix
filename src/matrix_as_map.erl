@@ -7,7 +7,6 @@
 %%% Created : 10 Oct 2017 by Math
 %%%-------------------------------------------------------------------
 -module(matrix_as_map).
-
 -export([rows_sums/1, cols_sums/1,
          get_value/3,set_value/4,
          load/1]).

@@ -127,18 +127,4 @@ thousand_coordinates_to_bits_test()->
     ActualResult =  bitstring_trailing:coordinates_to_bits({1,1000},11),
     ?assertEqual(AssumedResult, ActualResult).
 
-%% thousand_one_coordinates_to_bits_test()->
-%%      AssumedResult = <<1001:10>>,%1111101001
-%%      ActualResult =  bitstring_trailing:coordinates_to_bits(1001),
-%%      ?assertEqual(AssumedResult, ActualResult).
-
-%% thousand_25_coordinates_to_bits_test()->
-%%     AssumedResult = << 1025:11 >>,%10000000000
-%%     ActualResult =  bitstring_trailing:coordinates_to_bits(1025),
-%%     ?assertEqual(AssumedResult, ActualResult).
-
-%% eight_thousand_coordinates_to_bits_test()->
-%%      AssumedResult = <<8193:14>>,%10000000000000
-%%      ActualResult =  bitstring_trailing:coordinates_to_bits(8193),
-%%     ?assertEqual(AssumedResult, ActualResult).
 
