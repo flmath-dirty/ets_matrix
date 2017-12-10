@@ -10,52 +10,6 @@
 
 -include_lib("eunit/include/eunit.hrl").
 
-zero_length_test()->
-    AssumedResult = 1,
-    ActualResult =  bitstring_trailing:length(0),
-    ?assertEqual(AssumedResult, ActualResult).
-
-one_length_test()->
-    AssumedResult = 1,
-    ActualResult =  bitstring_trailing:length(1),
-    ?assertEqual(AssumedResult, ActualResult).
-
-two_length_test()->
-    AssumedResult = 2,
-    ActualResult =  bitstring_trailing:length(2),
-    ?assertEqual(AssumedResult, ActualResult).
-
-three_length_test()->
-    AssumedResult = 2,
-    ActualResult =  bitstring_trailing:length(3),
-    ?assertEqual(AssumedResult, ActualResult).
-
-four_length_test()->
-    AssumedResult = 3,
-    ActualResult =  bitstring_trailing:length(4),
-    ?assertEqual(AssumedResult, ActualResult).
-
-thousand_length_test()->
-    AssumedResult = 10,%1111101000
-    ActualResult =  bitstring_trailing:length(1000),
-    ?assertEqual(AssumedResult, ActualResult).
-
-thousand_one_length_test()->
-    AssumedResult = 10,%1111101001
-    ActualResult =  bitstring_trailing:length(1001),
-    ?assertEqual(AssumedResult, ActualResult).
-
-thousand_25_length_test()->
-    AssumedResult = 11,%10000000000
-    ActualResult =  bitstring_trailing:length(1025),
-    ?assertEqual(AssumedResult, ActualResult).
-
-eight_thousand_length_test()->
-    AssumedResult = 14,%10000000000000
-    ActualResult =  bitstring_trailing:length(8193),
-    ?assertEqual(AssumedResult, ActualResult).
-
-
 zero_compress_test()->
     AssumedResult = <<>>,
     ActualResult =  bitstring_trailing:compress(0),
@@ -103,28 +57,28 @@ eight_thousand_compress_test()->
 
 
 zero_coord_test()->
-    AssumedResult = <<>>,
-    ActualResult =  bitstring_trailing:coordinates_to_bits({0,0}, 0),
+    AssumedResult = <<0>>,
+    ActualResult =  bitstring_trailing:coordinates_to_bits({0,0}),
     ?assertEqual(AssumedResult, ActualResult).
 
 one_coordinates_to_bits_test()->
-    AssumedResult = <<1:1>>,
-    ActualResult =  bitstring_trailing:coordinates_to_bits({1,0},0),
+    AssumedResult = <<1:1,0:8>>,
+    ActualResult =  bitstring_trailing:coordinates_to_bits({1,0}),
     ?assertEqual(AssumedResult, ActualResult).
 
 two_coordinates_to_bits_test()->
-     AssumedResult = <<5:3>>,
-     ActualResult =  bitstring_trailing:coordinates_to_bits({1,1},2),
+     AssumedResult = <<1:1,1:8>>,
+     ActualResult =  bitstring_trailing:coordinates_to_bits({1,1}),
      ?assertEqual(AssumedResult, ActualResult).
 
 three_coordinates_to_bits_test()->
-    AssumedResult = <<19:5>>,
-    ActualResult =  bitstring_trailing:coordinates_to_bits({1,3},4),
+    AssumedResult = <<1:1,3:8>>,
+    ActualResult =  bitstring_trailing:coordinates_to_bits({1,3}),
     ?assertEqual(AssumedResult, ActualResult).
 
 thousand_coordinates_to_bits_test()->
-    AssumedResult = <<3048:12 >>,%101111101000
-    ActualResult =  bitstring_trailing:coordinates_to_bits({1,1000},11),
+    AssumedResult = <<66536:17>>,%10000001111101000
+    ActualResult =  bitstring_trailing:coordinates_to_bits({1,1000}),
     ?assertEqual(AssumedResult, ActualResult).
 
 

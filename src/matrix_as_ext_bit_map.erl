@@ -12,44 +12,42 @@
          load/1]).
 
 load({Width,Height,Matrix})->
-    LengthOfY = bitstring_trailing:length(Height),
     PropList = 
 	[{
-	   bitstring_trailing:coordinates_to_bits({X,Y},LengthOfY),
+	   bitstring_trailing:coordinates_to_bits({X,Y}),
 	   element(X+(Y-1)*Width, Matrix)
 	 } || Y<-lists:seq(1,Height), X<-lists:seq(1,Width)],
-    {Height, Width, LengthOfY, maps:from_list(PropList)}.
+    {Height, Width, maps:from_list(PropList)}.
 
-rows_sums({0, 0, _, _})-> [];
-rows_sums({Height, Width, LengthOfY, Map})->
-    rows_sums({Height, Width, LengthOfY, Map}, 1).
 
-rows_sums({Height, _Width, _LengthOfY, Map}, HeightStop) when HeightStop==Height+1->
+rows_sums({Height, Width, Map})->
+    rows_sums({Height, Width, Map}, 1).
+
+rows_sums({Height, _Width, _Map}, HeightStop) when HeightStop==Height+1->
     [];
-rows_sums({Height, Width, LengthOfY, Map}, RowIndex)->
+rows_sums({Height, Width, Map}, RowIndex)->
     RowIndexes = 
-	[bitstring_trailing:coordinates_to_bits({X,RowIndex}, LengthOfY) || X<-lists:seq(1,Width)],
+	[bitstring_trailing:coordinates_to_bits({X,RowIndex}) || X<-lists:seq(1,Width)],
     RowSubmap = maps:with(RowIndexes, Map),
     TheSum = lists:sum(maps:values(RowSubmap)),
-    [TheSum | rows_sums({Height, Width, LengthOfY, Map}, RowIndex+1)].
+    [TheSum | rows_sums({Height, Width, Map}, RowIndex+1)].
 
-cols_sums({0, 0, _, _})-> [];
-cols_sums({Height, Width, LengthOfY, Map})->
-    cols_sums({Height, Width, LengthOfY, Map}, 1).
+cols_sums({Height, Width, Map})->
+    cols_sums({Height, Width, Map}, 1).
 
-cols_sums({_Height, Width, LengthOfY, Map}, WidthStop) when WidthStop==Width+1->
+cols_sums({_Height, Width, _Map}, WidthStop) when WidthStop==Width+1->
     [];
-cols_sums({Height, Width, LengthOfY, Map}, ColIndex)->
+cols_sums({Height, Width, Map}, ColIndex)->
     ColIndexes = 
-	[bitstring_trailing:coordinates_to_bits({ColIndex,Y}, LengthOfY) || Y<-lists:seq(1,Height)],
+	[bitstring_trailing:coordinates_to_bits({ColIndex,Y}) || Y<-lists:seq(1,Height)],
     Colsubmap = maps:with(ColIndexes, Map),
     TheSum = lists:sum(maps:values(Colsubmap)),
-    [TheSum | cols_sums({Height, Width, LengthOfY, Map}, ColIndex+1)].
+    [TheSum | cols_sums({Height, Width, Map}, ColIndex+1)].
 
-get_value(TheX, TheY, {_Height, _Width, LengthOfY, Map})->
-    Index = bitstring_trailing:coordinates_to_bits({TheX, TheY}, LengthOfY),
+get_value(TheX, TheY, {_Height, _Width, Map})->
+    Index = bitstring_trailing:coordinates_to_bits({TheX, TheY}),
     maps:get(Index, Map).
 
-set_value(TheX, TheY, NewValue, {Height, Width, LengthOfY, Map})->
-    Index = bitstring_trailing:coordinates_to_bits({TheX, TheY}, LengthOfY),
-    {Height, Width, LengthOfY, Map#{Index:=NewValue}}.
+set_value(TheX, TheY, NewValue, {Height, Width, Map})->
+    Index = bitstring_trailing:coordinates_to_bits({TheX, TheY}),
+    {Height, Width, Map#{Index:=NewValue}}.

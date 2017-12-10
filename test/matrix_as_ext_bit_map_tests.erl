@@ -11,20 +11,21 @@
 -include_lib("eunit/include/eunit.hrl").
 
 load_empty_test()->
-    AssumedResult = {0,0,1,#{}},
+    AssumedResult = {0,0,#{}},
     ActualResult = matrix_as_ext_bit_map:load({0,0,{}}),
     ?assertEqual(AssumedResult, ActualResult).
 
 load_basic_test()->
-    AssumedResult = {3,2,2,#{
-		      <<9:4>> => 3,
-		      <<5:3>> => 2,
-		      <<10:4>> => 5,
-		      <<11:4>> => 7,
-		      <<6:3>> => 4,
-		      <<7:3>> => 6}},
-     ActualResult = matrix_as_ext_bit_map:load({2,3,{2,3,4,5,6,7}}),
-     ?assertEqual(AssumedResult, ActualResult).
+    AssumedResult = 
+	{3,2,
+	 #{<<128,1:2>> => 3,
+	   <<128,1:1>> => 2,
+	   <<128,2:2>> => 5,
+	   <<128,3:2>> => 7,
+	   <<129,0:1>> => 4,
+	   <<129,1:1>> => 6}},
+	 ActualResult = matrix_as_ext_bit_map:load({2,3,{2,3,4,5,6,7}}),
+	 ?assertEqual(AssumedResult, ActualResult).
 
 rows_sums_empty_test()->
     AssumedResult = [],

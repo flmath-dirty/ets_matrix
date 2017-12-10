@@ -13,7 +13,8 @@
          load/1]).
 
 load({Width,Height,Matrix})->
-    RelAsList = [ {X, Y, element(X+(Y-1)*Width, Matrix)} || Y<-lists:seq(1,Height),X<-lists:seq(1,Width)],
+    RelAsList = [{X, Y, element(X+(Y-1)*Width, Matrix)} || 
+		    Y<-lists:seq(1,Height),X<-lists:seq(1,Width)],
     sofs:relation(RelAsList).
 
 rows_sums({_,[],_}) ->
@@ -30,7 +31,6 @@ cols_sums(Relation)->
 
 sum_output_values(Part)->
      lists:sum([Output|| {_X, _Y, Output} <- Part]).
-
 
 get_value(TheX, TheY, Relation)->
     [{TheX, TheY, Value}] = 
