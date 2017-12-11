@@ -9,17 +9,19 @@
 
 %% escript Entry point
 
-main([Module, Function, "range", SizeStep, MatrixMaxSize, RunsNoStep, RunsNoMax]) ->
+main([Module, Function, "range", 
+      MatrixMinSize, SizeStep, MatrixMaxSize, 
+      RunsNoMin, RunsNoStep, RunsNoMax]) ->
     lists:foreach(
       fun({Size, RunsNo})-> 
 	      main([Module, Function, integer_to_list(Size), 
 		    integer_to_list(Size), integer_to_list(RunsNo)])
       end, 
       [{S,R}  ||
-	  R<-lists:seq(list_to_integer(RunsNoStep),
+	  R<-lists:seq(list_to_integer(RunsNoMin),
 		       list_to_integer(RunsNoMax),
 		       list_to_integer(RunsNoStep)),
-	  S<-lists:seq(list_to_integer(SizeStep),
+	  S<-lists:seq(list_to_integer(MatrixMinSize),
 		       list_to_integer(MatrixMaxSize),
 		       list_to_integer(SizeStep))]);
 main([Module, "all", MatrixWidth, MatrixHeight, RunsNo]) ->
@@ -72,8 +74,8 @@ usage()->
     io:format(
       "usage:"
       "ets_matrix Module, Function, MatrixWidth, MatrixHeight, Number of runs \n"
-      "ets_matrix Module, Function, \"range\" Matrix Size Increase step, Biggest matrix size,"
-      "No of runs Increase step, Biggest No of runs \n"
+      "ets_matrix Module, Function, \"range\" \"Min matrix size\" \"Increase step\", \"Max matrix size,\" "
+      "\"Min no of runs\" \"No of runs\" \"increase step\", \"Max no of runs\" \n"
       "Module ex.  all\n"),
     lists:foreach(
       fun(Name)-> io:format("~p~n",[list_to_atom(Name)]) end,
@@ -85,7 +87,7 @@ usage()->
     io:format("MatrixWidth, MatrixHeight, the number of runs are integers\n"
               "examples:"
 	      "ets_matrix matrix_as_map get_value 1000 1000 1000 \n"
-	      "ets_matrix matrix_as_map get_value range 10 100 10 100 \n"
+	      "ets_matrix matrix_as_map get_value range 10 10 100 10 10 100 \n"
 	      "ets_matrix all all 10 100 100 \n"
 	     ,[]).
 
