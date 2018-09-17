@@ -34,7 +34,9 @@ cols_sums({Width,_Height,_Matrix},ColNo,_Acc) when Width==ColNo->
     [];
 cols_sums({Width,Height,Matrix},ColNo,Acc) ->
     ColSum = lists:sum(
-               [element(Index, Matrix)|| Index <- lists:seq(ColNo+1,ColNo+(Width*(Height-1))+1,Width)]),
+               [element(Index, Matrix)|| 
+		   Index <- lists:seq(ColNo+1,ColNo+(Width*(Height-1))+1,Width)]),
+    
     [ColSum | cols_sums({Width,Height,Matrix},ColNo+1,Acc)].
 
 get_value(X, Y,{Width,_Height,Matrix})->

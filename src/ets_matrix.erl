@@ -102,6 +102,7 @@ list_of_matrix_forms()->
      "matrix_as_ets",
      "matrix_as_big_tuple",
      "matrix_as_ets_list",
+     "matrix_as_tuple_of_tuples",
      "matrix_as_list_of_lists",
      "matrix_as_sofs"
     ].
